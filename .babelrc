@@ -1,0 +1,8 @@
+{
+  "comments": false,
+  "presets": ["@babel/preset-env"],
+  "plugins": ["@babel/transform-runtime"],
+  "ignore": [
+    "./src/utils/polyfill.js"
+  ]
+}
