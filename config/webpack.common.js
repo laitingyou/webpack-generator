@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const MiniCssExtractPlugin  = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const env = process.env.NODE_ENV
 const devMode = env === 'development'
@@ -90,46 +90,50 @@ module.exports = {
         ],
         use: [
           !devMode ? {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
-          } :
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../'
+              }
+            } :
             // {
             //   loader: "style-loader",
             //
             // },
-          { loader: 'vue-style-loader' },
+
             {
-              loader: "css-loader",
-              options: {
-                import: false,
-                // minimize: env === 'production',
-                // sourceMap: env === 'development',
-              }
-            },
-          // {
-          //   loader:  'postcss-loader',
-          //   options:{
-          //     config: {
-          //       path: '../postcss.config.js'
-          //     }
-          //   }
-          // },
-            {
-              loader: "sass-loader",
-              options:{
-                sourceMap: devMode
-              }
+              loader: 'vue-style-loader'
             },
           {
+            loader: "css-loader",
+            options: {
+              import: false,
+              // minimize: env === 'production',
+              // sourceMap: env === 'development',
+            }
+          },
+          'postcss-loader',
+          // {
+          // loader:  'postcss-loader',
+          // options:{
+          //   config: {
+          //     path: path.resolve(__dirname, '../postcss.config.js')
+          //   }
+          // }
+          // },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: devMode
+            }
+          },
+          {
             loader: "sass-resources-loader",
-            options:{
-              resources: [path.resolve(__dirname, "../src/global.scss")]
+            options: {
+              resources: [ path.resolve(__dirname, "../src/global.scss") ]
             }
           },
 
-          ]
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -165,7 +169,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.js/,
+        test: /\.(js|jsx)/,
         // exclude: [
         //   path.resolve(__dirname, "../node_modules"),
         //   path.resolve(__dirname, "../src/utils/"),
@@ -221,6 +225,6 @@ module.exports = {
       utils: path.resolve(__dirname, '../src/utils')
     },
     modules: [ path.resolve(__dirname, '../public/lib'), 'node_modules' ],
-    extensions: [".js", ".json", ".vue"]
+    extensions: [ ".js", ".json", ".vue", ".jsx" ]
   }
 }

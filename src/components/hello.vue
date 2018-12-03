@@ -7,7 +7,7 @@
     export default {
       data(){
         return {
-            a: 1231323
+            a: 123132313122
         }
       }
     }

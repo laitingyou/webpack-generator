@@ -1,7 +1,9 @@
 const webpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack')
 const minimist = require('minimist')
+
 const args = minimist(process.argv.slice(2) || 'pro')
+
 const config = require(`./webpack.${args.env}.config.js`)
 const options = {
   contentBase: '../dist',
