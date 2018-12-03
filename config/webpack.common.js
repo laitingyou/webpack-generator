@@ -94,10 +94,12 @@ module.exports = {
             options: {
               publicPath: '../'
             }
-          } : {
-              loader: "style-loader",
-
-            },
+          } :
+            // {
+            //   loader: "style-loader",
+            //
+            // },
+          { loader: 'vue-style-loader' },
             {
               loader: "css-loader",
               options: {
@@ -120,6 +122,12 @@ module.exports = {
                 sourceMap: devMode
               }
             },
+          {
+            loader: "sass-resources-loader",
+            options:{
+              resources: [path.resolve(__dirname, "../src/global.scss")]
+            }
+          },
 
           ]
       },
@@ -172,19 +180,37 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // js: 'babel-loader!eslint-loader',
-            scss: [
-              'vue-style-loader',
-              'css-loader',
-              // 'postcss-loader',
-              'sass-loader',
-
-            ] // <style lang="scss">
-          }
-        }
+        use: 'vue-loader'
+        // loader: 'vue-loader',
+        // options: {
+        //   loaders: {
+        //     // js: 'babel-loader!eslint-loader',
+        //     sass:[
+        //       'vue-style-loader',
+        //       'css-loader',
+        //       // 'postcss-loader',
+        //       'sass-loader?indentedSyntax=1',
+        //       {
+        //         loader: 'sass-resources-loader',
+        //         options: {
+        //           resources: path.resolve(__dirname, '../src/global.scss'),
+        //         },
+        //       },
+        //     ],
+        //     scss: [
+        //       'vue-style-loader',
+        //       'css-loader',
+        //       // 'postcss-loader',
+        //       'sass-loader',
+        //       {
+        //         loader: "sass-resources-loader",
+        //         options:{
+        //           resources: path.resolve(__dirname, '../src/global.scss'),
+        //         }
+        //       }
+        //     ] // <style lang="scss">
+        //   }
+        // }
       },
 
     ],

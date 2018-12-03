@@ -1,8 +1,5 @@
-%demo{
-  background: #000;
-}
 $section-width: 700px;
-@mixin section-mixin {
+@mixin demo {
   margin: 0 auto;
   width: $section-width;
 }
