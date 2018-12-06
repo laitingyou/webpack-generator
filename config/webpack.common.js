@@ -28,6 +28,12 @@ module.exports = {
       verbose: true,
       dry: false
     }),
+    
+     new webpack.BannerPlugin({
+      banner: '/*name:[name]*/',
+      raw: true
+    }),
+    
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
