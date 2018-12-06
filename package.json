@@ -1,6 +1,6 @@
 {
-  "name": "react-blog",
-  "version": "1.0.0",
+  "name": "webpack-generator",
+  "version": "1.0.1",
   "description": "",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "dev": "webpack --config=config/webpack.dev.config.js --watch",
     "build": "webpack --config=config/webpack.prod.js"
   },
-  "author": "",
+  "author": "laitingyou@outlook.com",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.1.6",
