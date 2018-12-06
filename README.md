@@ -5,6 +5,10 @@
 1. npm install 
 2. npm run server -- --env=dev
 ```
+### 测试 (会生成文件到dist)
+```
+1. npm run dev -- --env=dev
+```
 ### 部署
 ```$xslt
 1. npm run build -- --env=prod
