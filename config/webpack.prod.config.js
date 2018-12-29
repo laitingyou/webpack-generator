@@ -10,5 +10,13 @@ module.exports = merge(common,{
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
 
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: false } }],
+      },
+      canPrint: true
+    })
   ]
 })

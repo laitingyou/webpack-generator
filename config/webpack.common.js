@@ -34,6 +34,10 @@ module.exports = {
       // chunks:['app'],
       excludeChunks: [ 'polyfills' ]
     }),
+    new webpack.BannerPlugin({
+      banner: '/*!aid:2018120316505511204*/',
+      raw: true
+    }),
     // new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
 

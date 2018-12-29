@@ -8,7 +8,7 @@
     "watch": "webpack-dev-server --mode=development --open --config=config/webpack.dev.config.js",
     "server": "nodemon --exec \"set NODE_ENV=development&& node ./config/dev.server.jS --env=dev\" --config=./nodemon.json",
     "dev": "webpack --config=config/webpack.dev.config.js --watch",
-    "build": "webpack --config=config/webpack.prod.js"
+    "build": "webpack --config=config/webpack.prod.config.js"
   },
   "author": "",
   "license": "ISC",
