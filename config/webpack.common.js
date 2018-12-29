@@ -23,7 +23,17 @@ module.exports = {
   },
   plugins: [
 
-    new CleanWebpackPlugin([ '../dist' ]),
+     new CleanWebpackPlugin('dist/*.*', {
+      root: path.resolve(__dirname, '..'),
+      verbose: true,
+      dry: false
+    }),
+    
+     new webpack.BannerPlugin({
+      banner: '/*name:[name]*/',
+      raw: true
+    }),
+    
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',

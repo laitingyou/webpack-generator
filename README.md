@@ -5,6 +5,10 @@
 1. npm install 
 2. npm run server -- --env=dev
 ```
+### 测试 (会生成文件到dist)
+```
+1. npm run dev -- --env=dev
+```
 ### 部署
 ```$xslt
 1. npm run build -- --env=prod
@@ -17,3 +21,4 @@
 5. 部署环境下会进行css提取
 6. 部署环境下，引用超过2次的js模块会被打包到一个js文件
 7. 自动引入了lodash.js工具函数，可全局使用
+8. 支持强类型语言TypeScript
