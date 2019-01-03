@@ -1,18 +1,11 @@
-// import './index.scss'
-// import Vue from 'vue'
-//
-// import Hello from './components/hello'
-//
-// new Vue({
-//   el: '#app',
-//   render(h){
-//     return h(Hello)
-//   }
-// })
-import React from 'react'
-import ReactDom from 'react-dom'
-import World from './components/World'
-ReactDom.render(
-  <World/>,
-  document.getElementById('app')
-)
+import Vue from 'vue';
+import Hello from './components/hello.vue.js';
+var vm = new Vue({
+    el: '#app',
+    render: function (h) {
+        return h(Hello);
+    }
+    // template: `<div>12321321</div>`
+});
+// console.log(vm.$refs)
+//# sourceMappingURL=index.js.map

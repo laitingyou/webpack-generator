@@ -8,12 +8,12 @@ const env = process.env.NODE_ENV
 const devMode = env === 'development'
 module.exports = {
   entry: {
-    polyfills: './src/utils/polyfills.js',
-    app: './src/index.js',
+    // polyfills: './src/utils/polyfills.js',
+    app: './src/index.ts',
     // print: './src/print.js',
-    vendor: [
-      'lodash'
-    ]
+    // vendor: [
+    //   'lodash'
+    // ]
   },
   output: {
     filename: '[name].bundle.js',
@@ -44,16 +44,16 @@ module.exports = {
       // chunks:['app'],
       excludeChunks: [ 'polyfills' ]
     }),
-    new webpack.BannerPlugin({
-      banner: '/*!aid:2018120316505511204*/',
-      raw: true
-    }),
+    // new webpack.BannerPlugin({
+    //   banner: '/*!aid:2018120316505511204*/',
+    //   raw: true
+    // }),
     // new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
 
-    new webpack.ProvidePlugin({
-      _: 'lodash'
-    }),
+    // new webpack.ProvidePlugin({
+    //   _: 'lodash'
+    // }),
 
     new MiniCssExtractPlugin({
       filename: "[name].css",
@@ -173,14 +173,17 @@ module.exports = {
         test: /\.xml$/,
         use: [ 'xml-loader' ]
       },
-      {
-        test: require.resolve('../src/utils/globals.js'),
-        use: 'exports-loader?globals'
-      },
+      // {
+      //   test: require.resolve('../src/utils/globals.js'),
+      //   use: 'exports-loader?globals'
+      // },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.(js|jsx)/,
@@ -236,7 +239,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      utils: path.resolve(__dirname, '../src/utils')
+      utils: path.resolve(__dirname, '../src/utils'),
+      // 'vue': 'vue/dist/vue.esm.js'
     },
     modules: [ path.resolve(__dirname, '../public/lib'), 'node_modules' ],
     extensions: [ ".js", ".json", ".vue", ".jsx" ]
