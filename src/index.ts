@@ -7,6 +7,9 @@ Vue.config.productionTip = false;
 import './index.scss'
 const MockTest = require('./test/index')
 
+import WButton from './components/common/Button.vue'
+Vue.component('WButton', WButton)
+
 let vm= new Vue({
     el: '#app',
     router,

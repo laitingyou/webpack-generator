@@ -9,9 +9,9 @@
                 :style="{width: boxWidth + 'px'}"
         >
             <div class="item-box" ref="itemBox">
-                <div class="swiper-item" :style="{width: swiperItemWidth + 'px'}" v-for="(item, index) in prizzas"
+                <div class="swiper-item" :style="{width: swiperItemWidth + 'px'}" v-for="(item, index) in swiperList"
                      :key="index">
-                    <slot>
+                    <slot :slot-scope="item">
                         <img :src="item.img" alt="">
                     </slot>
                 </div>
@@ -21,24 +21,12 @@
     </transition>
 </template>
 <script lang="ts">
-    import {Vue, Component} from 'vue-property-decorator'
-
+    import {Vue, Component,Prop} from 'vue-property-decorator'
+    import Util from '../../utils/util'
     @Component
     export default class SwiperComponent extends Vue {
-        prizzas: Array<Object> = [
-            {
-                img: '//mmgr.gtimg.com/gjsmall/sdi/activity/2019010217544611351/index_card1.png'
-            },
-            {
-                img: '//mmgr.gtimg.com/gjsmall/sdi/activity/2019010217544611351/index_card1.png'
-            },
-            {
-                img: '//mmgr.gtimg.com/gjsmall/sdi/activity/2019010217544611351/index_card1.png'
-            },
-            // {
-            //     img: '//mmgr.gtimg.com/gjsmall/sdi/activity/2019010217544611351/index_card1.png'
-            // }
-        ]
+        @Prop({type:Array, default: []}) readonly data!: Array<object>
+        swiperList: Array<object> = []
         swiperStart: number = 0
         swiperMove: number = 0
         swiperend: number = 0
@@ -49,16 +37,20 @@
         swiping: boolean = false
 
         get boxWidth() {
-            return this.prizzas.length * this.swiperItemWidth
+            return this.swiperList.length * this.swiperItemWidth
         }
 
         mounted(): void {
-            let len = this.prizzas.length
+            this.swiperList = Util.deepCopy(this.data)
+            let len = this.swiperList.length
             if (len > 2) {
-                this.prizzas = [this.prizzas[len - 2], this.prizzas[len - 1], ...this.prizzas, this.prizzas[0], this.prizzas[1]]
+                this.swiperList = [this.swiperList[len - 2], this.swiperList[len - 1], ...this.swiperList, this.swiperList[0], this.swiperList[1]]
+                this.$nextTick(()=>{
+                    this.swipeTo(this.currentIndex)
+                })
             }
-            console.log(this.boxWidth)
-            this.swipeTo(this.currentIndex)
+            // console.log(this.boxWidth)
+
         }
 
         /*----------methods------*/
@@ -95,6 +87,7 @@
          */
         onSwiperEnd(e: any): void {
             if (this.swiping) return
+            if(this.swiperMove === 0) return
             this.swiping = true
             let swiperStyle = (<HTMLElement>this.$refs.swiper).style
             let end: string = swiperStyle.transform || 'translateX(0px)'
@@ -117,7 +110,6 @@
          * @param index
          */
         swipeTo(index: number, duration: number = 500, once?: number) {
-
             let swiperStyle = (<HTMLElement>this.$refs.swiper).style
             let {swiperItemWidth} = this
             this.swiperInit = -swiperItemWidth - swiperItemWidth * 0.78 - index * swiperItemWidth
@@ -135,14 +127,18 @@
                     setTimeout(() => {
                         this.swipeTo(2, 0, 1)
                     }, duration)
+                    return
                 } else if (index === 3) {
                     setTimeout(() => {
                         this.swipeTo(0, 0, 1)
                     }, duration)
+                    return
                 }
             }
             setTimeout(() => {
                 this.swiping = false
+                this.swiperMove = 0
+                this.$emit('onSwipeIndex',index)
             }, 500)
 
         }
